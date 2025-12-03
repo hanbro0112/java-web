@@ -19,6 +19,6 @@ public class Emp {
     private Short job;
     private LocalDateTime entrydate;
     private Integer deptId;
-    private LocalDateTime createdate;
-    private LocalDateTime updatedate;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 }

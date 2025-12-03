@@ -23,6 +23,7 @@ public interface DeptService {
      *
      */
     void add(Dept dept);
+
     /**
      * 更新部門數據
      * @param dept
