@@ -4,6 +4,7 @@ import com.web.pojo.Emp;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -15,8 +16,8 @@ public interface EmpMapper {
      * 統計員工總數
      * @return
      */
-    @Select("select count(*) from emp")
-    public Long count();
+    /*@Select("select count(*) from emp")
+    public Long count();*/
 
     /**
      * 分頁查詢員工列表數據
@@ -24,6 +25,14 @@ public interface EmpMapper {
      * @param pageSize 每頁顯示條數
      * @return
      */
-    @Select("select * from emp limit #{start}, #{pageSize}")
-    public List<Emp> page(Integer start, Integer pageSize);
+    /*@Select("select * from emp limit #{start}, #{pageSize}")
+    public List<Emp> page(Integer start, Integer pageSize);*/
+
+    /**
+     * 查詢全部員工數據
+     * @return
+     */
+    // @Select("select * from emp")
+
+    public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
 }
