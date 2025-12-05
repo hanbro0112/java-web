@@ -4,6 +4,7 @@ import com.web.pojo.PageBean;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface EmpService {
 
@@ -18,4 +19,10 @@ public interface EmpService {
      * @return
      */
     PageBean page(Integer page, Integer pageSize, String name, Short gender, LocalDate begin, LocalDate end);
+
+    /**
+     * 批量刪除員工
+     * @param ids
+     */
+    void delete(List<Integer> ids);
 }

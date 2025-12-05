@@ -3,21 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.web.mapper.EmpMapper">
-
+    <!-- 條件查詢 -->
     <select id="list" resultType="com.web.pojo.Emp">
         select *
         from emp
        <where>
-           <if test="name != null">
+           <if test="name != null and name != ''">
                name like concat('%', #{name}, '%')
            </if>
             <if test="gender != null">
                 and gender = #{gender}
             </if>
             <if test="begin != null and end != null">
-                and entrydate between #{begin} and #{end}
+                and entry_date between #{begin} and #{end}
             </if>
        </where>
     </select>
+
+    <!-- 批量刪除 -->
+    <delete id="delete">
+        delete from emp
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

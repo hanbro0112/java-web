@@ -33,6 +33,11 @@ public interface EmpMapper {
      * @return
      */
     // @Select("select * from emp")
-
     public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
+
+    /**
+     * 批量刪除員工數據
+     * @param ids
+     */
+    public void delete(List<Integer> ids);
 }
