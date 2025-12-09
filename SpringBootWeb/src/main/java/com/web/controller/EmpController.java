@@ -1,10 +1,11 @@
 package com.web.controller;
 
+import com.web.pojo.Emp;
 import com.web.pojo.PageBean;
 import com.web.pojo.Result;
 import com.web.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class EmpController {
     @Autowired
     private EmpService empService;
 
-    @GetMapping()
+    @GetMapping
     public Result page(@RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize,
                        String name, Short gender,
@@ -37,6 +38,13 @@ public class EmpController {
     public Result delete(@PathVariable List<Integer> ids) {
         log.info("刪除員工 參數: {} ", ids);
         empService.delete(ids);
+        return Result.success();
+    }
+
+    @PostMapping
+    public Result save(@RequestBody Emp emp) {
+        log.info("添加員工 參數: {} ", emp);
+        empService.save(emp);
         return Result.success();
     }
 }

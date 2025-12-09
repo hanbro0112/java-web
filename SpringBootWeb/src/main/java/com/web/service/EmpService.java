@@ -1,7 +1,7 @@
 package com.web.service;
 
+import com.web.pojo.Emp;
 import com.web.pojo.PageBean;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,4 +25,10 @@ public interface EmpService {
      * @param ids
      */
     void delete(List<Integer> ids);
+
+    /**
+     * 添加員工
+     * @param emp
+     */
+    void save(Emp emp);
 }

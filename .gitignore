@@ -1,2 +1,4 @@
 # Intellij IDEA
 .idea/
+SpringBootWeb/target/
+SpringBootWeb/src/main/resources/upload/

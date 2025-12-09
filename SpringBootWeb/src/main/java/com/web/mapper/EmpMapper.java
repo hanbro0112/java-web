@@ -1,8 +1,8 @@
 package com.web.mapper;
 
 import com.web.pojo.Emp;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,27 +12,11 @@ import java.util.List;
  */
 @Mapper
 public interface EmpMapper {
-    /**
-     * 統計員工總數
-     * @return
-     */
-    /*@Select("select count(*) from emp")
-    public Long count();*/
-
-    /**
-     * 分頁查詢員工列表數據
-     * @param start 起始位置
-     * @param pageSize 每頁顯示條數
-     * @return
-     */
-    /*@Select("select * from emp limit #{start}, #{pageSize}")
-    public List<Emp> page(Integer start, Integer pageSize);*/
 
     /**
      * 查詢全部員工數據
      * @return
      */
-    // @Select("select * from emp")
     public List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
 
     /**
@@ -40,4 +24,12 @@ public interface EmpMapper {
      * @param ids
      */
     public void delete(List<Integer> ids);
+
+    /**
+     * 添加員工數據
+     * @param emp
+     */
+    @Insert("insert into emp(username, name, gender, job, entry_date, dept_id, create_time, update_time) " +
+            " values(#{username}, #{name}, #{gender}, #{job}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})")
+    public void insert(Emp emp);
 }

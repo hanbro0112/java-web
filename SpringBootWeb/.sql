@@ -17,7 +17,7 @@ insert into dept (id, name, create_time, update_time) values
 create table emp (
     id int unsigned primary key auto_increment comment 'ID',
     username varchar(20) not null unique comment '用戶名',
-    password varchar(36) not null comment '密碼',
+    password varchar(36) not null default '123456' comment '密碼',
     name varchar(50) not null comment '姓名',
     gender tinyint unsigned not null comment '性別 0-女 1-男',
     image varchar(300) comment '頭像',
