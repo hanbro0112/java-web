@@ -9,21 +9,24 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Slf4j
 @RestController
 public class UploadController {
 
-    String projectUploadPath = System.getProperty("user.dir") + "/SpringBootWeb/src/main/resources/upload/images";
+    String projectUploadPath = System.getProperty("user.dir") + "/SpringBootWeb/upload";
 
     @PostMapping("/upload")
-    public Result upload(String username, Integer age, MultipartFile image) throws Exception {
+    public Result upload(MultipartFile image) throws Exception {
         // 本地存儲
         String originalFilename = image.getOriginalFilename();
+        String uid = UUID.randomUUID().toString();
 
-        log.info("項目上傳路徑: {}", projectUploadPath + "/" + originalFilename);
+        String url = projectUploadPath + "/" + uid + "_" + originalFilename;
+        log.info("項目上傳路徑: {}", url);
 
-        image.transferTo(new File(projectUploadPath + "/" + originalFilename));
-        return Result.success();
+        image.transferTo(new File(url));
+        return Result.success(url);
     }
 }

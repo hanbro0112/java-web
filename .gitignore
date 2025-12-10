@@ -1,4 +1,6 @@
 # Intellij IDEA
 .idea/
 SpringBootWeb/target/
-SpringBootWeb/src/main/resources/upload/
+
+SpringBootWeb/upload/**
+!SpringBootWeb/upload/.gitkeep
