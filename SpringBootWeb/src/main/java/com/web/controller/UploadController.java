@@ -25,8 +25,9 @@ public class UploadController {
 
         String url = projectUploadPath + "/" + uid + "_" + originalFilename;
         log.info("項目上傳路徑: {}", url);
+        log.info("項目訪問路徑: {}", "localhost:8080/upload/" + uid + "_" + originalFilename);
 
         image.transferTo(new File(url));
-        return Result.success(url);
+        return Result.success("localhost:8080/upload/" + uid + "_" + originalFilename);
     }
 }

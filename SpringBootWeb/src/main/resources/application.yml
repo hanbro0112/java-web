@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    # 驅動類名稱
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 資料庫連接 URL
+    url: jdbc:mysql://localhost:3306/tlias
+    # 資料庫使用者
+    username: user
+    # 資料庫密碼
+    password: user
+
+  # 文件上傳配置
+  servlet:
+    multipart:
+      # 最大檔案上傳大小
+      max-file-size: 10MB
+      # 最大請求大小
+      max-request-size: 10MB
+
+mybatis:
+  configuration:
+    # MyBatis 日誌輸出到控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # MyBatis 下劃線自動映射到駝峰命名
+    map-underscore-to-camel-case: true
+
+
