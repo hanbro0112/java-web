@@ -45,4 +45,11 @@ public interface EmpService {
      * @return
      */
     void update(Emp emp);
+
+    /**
+     * 員工登錄
+     * @param emp
+     * @return
+     */
+    Emp login(Emp emp);
 }

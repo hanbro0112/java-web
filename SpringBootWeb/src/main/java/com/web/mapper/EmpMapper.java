@@ -47,4 +47,12 @@ public interface EmpMapper {
      * @param emp
      */
     void update(Emp emp);
+
+    /**
+     * 根據用戶名和密碼查詢員工數據
+     * @param emp
+     * @return
+     */
+    @Select("select * from emp where username = #{username} and password = #{password}")
+    Emp getByUsernameAndPassword(Emp emp);
 }
