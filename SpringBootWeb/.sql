@@ -44,3 +44,10 @@ insert into emp (id, username, password, name, gender, image, job, entry_date, d
       (13, 'liliu', '123456', '李六', 0, null, 3, '2021-06-06', 4, now(), now()),
       (14, 'wangqi', '123456', '王七', 1, null, 1, '2018-09-09', 1, now(), now()),
       (15, 'zhaoba', '123456', '趙八', 0, null, 2, '2019-11-11', 2, now(), now());
+
+-- 部門操作日誌
+create table dept_log (
+    id int unsigned primary key auto_increment comment 'ID',
+    create_time datetime not null comment '操作時間',
+    description varchar(200) not null comment '操作描述'
+)

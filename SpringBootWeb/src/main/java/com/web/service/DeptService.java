@@ -12,7 +12,7 @@ public interface DeptService {
     List<Dept> list();
 
     /**
-     * 刪除部門數據
+     * 刪除部門數據和員工
      * @param id
      */
     void delete(Integer id);
