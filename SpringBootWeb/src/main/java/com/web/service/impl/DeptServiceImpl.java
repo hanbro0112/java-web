@@ -29,15 +29,17 @@ public class DeptServiceImpl implements DeptService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void delete(Integer id) {
-        deptMapper.deleteById(id);
+        try {
+            deptMapper.deleteById(id);
 
-        empMapper.deleteByDeptId(id);
-
-        // 寫入操作日誌
-        DeptLog deptLog = new DeptLog();
-        deptLog.setCreateTime(LocalDateTime.now());
-        deptLog.setDescription("Deleted department with ID: " + id);
-        deptLogService.insert(deptLog);
+            empMapper.deleteByDeptId(id);
+        } finally {
+            // 寫入操作日誌
+            DeptLog deptLog = new DeptLog();
+            deptLog.setCreateTime(LocalDateTime.now());
+            deptLog.setDescription("Deleted department with ID: " + id);
+            deptLogService.insert(deptLog);
+        }
     }
 
     @Override
