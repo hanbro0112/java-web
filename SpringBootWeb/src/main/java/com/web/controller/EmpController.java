@@ -1,5 +1,6 @@
 package com.web.controller;
 
+import com.web.anno.Log;
 import com.web.pojo.Emp;
 import com.web.pojo.PageBean;
 import com.web.pojo.Result;
@@ -34,6 +35,7 @@ public class EmpController {
         return Result.success(pageBean);
     }
 
+    @Log
     @DeleteMapping("/{ids}")
     public Result delete(@PathVariable List<Integer> ids) {
         log.info("刪除員工 參數: {} ", ids);
@@ -41,6 +43,7 @@ public class EmpController {
         return Result.success();
     }
 
+    @Log
     @PostMapping
     public Result save(@RequestBody Emp emp) {
         log.info("添加員工 參數: {} ", emp);
@@ -48,6 +51,7 @@ public class EmpController {
         return Result.success();
     }
 
+    @Log
     @GetMapping("/{id}")
     public Result getById(@PathVariable Integer id) {
         log.info("根據ID查詢員工 參數: {} ", id);
@@ -61,6 +65,7 @@ public class EmpController {
      * @param emp
      * @return
      */
+    @Log
     @PutMapping
     public Result update(@RequestBody Emp emp) {
         log.info("修改員工 參數: {} ", emp);

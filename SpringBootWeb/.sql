@@ -50,4 +50,16 @@ create table dept_log (
     id int unsigned primary key auto_increment comment 'ID',
     create_time datetime not null comment '操作時間',
     description varchar(200) not null comment '操作描述'
-)
+);
+
+-- 操作日誌表
+create table operate_log (
+    id int unsigned primary key auto_increment comment 'ID',
+    operate_user int unsigned comment '操作用戶ID',
+    operate_time datetime comment '操作時間',
+    class_name varchar(100) comment '操作類名',
+    method_name varchar(100) comment '操作方法名',
+    method_params varchar(1000) comment '操作參數',
+    return_value varchar(2000) comment '返回值',
+    cost_time bigint comment '耗時(ms)'
+) comment '操作日誌表';

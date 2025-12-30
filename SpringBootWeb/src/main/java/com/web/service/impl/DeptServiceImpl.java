@@ -1,5 +1,6 @@
 package com.web.service.impl;
 
+import com.web.aop.MyLog;
 import com.web.mapper.DeptMapper;
 import com.web.mapper.EmpMapper;
 import com.web.pojo.Dept;
@@ -26,6 +27,7 @@ public class DeptServiceImpl implements DeptService {
         return deptMapper.list();
     }
 
+    @MyLog
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void delete(Integer id) {

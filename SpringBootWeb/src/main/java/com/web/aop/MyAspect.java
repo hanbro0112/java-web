@@ -10,8 +10,10 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class MyAspect {
 
-    @Pointcut("execution(* com.web.service.impl.DeptServiceImpl.*(..))")
-    private void pt() {};
+    // @Pointcut("execution(* com.web.service.impl.DeptServiceImpl.*(..))")
+    // @Pointcut("execution(public void com.web.service.impl.DeptServiceImpl.delete(java.lang.Integer))")
+    @Pointcut("@annotation(com.web.aop.MyLog)")
+    public void pt() {};
 
     @Before("pt()")
     public void before() {
@@ -21,6 +23,11 @@ public class MyAspect {
     @Around("pt()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("環繞前通知");
+
+        String className = joinPoint.getTarget().getClass().getName();
+        String methodName = joinPoint.getSignature().getName();
+        Object[] args = joinPoint.getArgs();
+        log.info("類名：{}, 方法名：{}, 參數：{}", className, methodName, args);
 
         Object result = joinPoint.proceed();
 
