@@ -1,6 +1,8 @@
 # Intellij IDEA
-.idea/
-SpringBootWeb/target/
-
+.idea
+**/target/
+*.iml
+*.class
+# Spring Boot file upload directory
 SpringBootWeb/upload/**
 !SpringBootWeb/upload/.gitkeep
