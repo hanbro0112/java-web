@@ -1,0 +1,9 @@
+services:
+  nginx:
+    image: nginx:1.20.2
+    container_name: sky_take_out_frontend
+    ports:
+        - "80:80"
+    volumes:
+        - ./nginx-120.2/conf/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./nginx-120.2/html:/html
