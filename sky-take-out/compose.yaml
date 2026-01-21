@@ -2,9 +2,11 @@ services:
   nginx:
     image: nginx:1.20.2
     container_name: sky_take_out_frontend
-    network_mode: host # 容器與宿主機共享網路
     ports:
         - "80:80"
+    # 為了能連線到宿主機上的資料庫或 Java 後端
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
         - ./nginx-1.20.2/conf/nginx.conf:/etc/nginx/nginx.conf
         - ./nginx-1.20.2/html:/etc/nginx/html
