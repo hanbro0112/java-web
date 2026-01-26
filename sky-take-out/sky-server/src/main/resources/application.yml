@@ -17,3 +17,17 @@ mybatis:
   type-aliases-package: com.sky.entity #實體類別所在的包
   configuration:
     map-underscore-to-camel-case: true #駝峰命名
+
+logging:
+  level:
+    com:
+      sky:
+        mapper: debug #設置 mapper 日誌級別為 debug，方便查看 SQL 語句
+        service: info
+        controller: info
+
+sky:
+  jwt:
+    admin-secret-key: itcast
+    admin-ttl: 7200000 #20 小時
+    admin-token-name: token #前端設置令牌名稱
