@@ -99,4 +99,44 @@ public class EmployeeController {
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
+
+    /**
+     * 啟用或禁用員工帳號
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @Operation(summary = "啟用或禁用員工帳號")
+    public Result startOrStop(@PathVariable Integer status, Long id) {
+        log.info("啟用或禁用員工帳號，參數: status = {}, id = {}", status, id);
+        employeeService.startOrStop(status, id);
+        return Result.success();
+    }
+
+    /**
+     * 根據 ID 查詢員工信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @Operation(summary = "根據 ID 查詢員工信息")
+    public Result<Employee> getById(@PathVariable Long id) {
+        log.info("根據 ID 查詢員工信息，參數: id = {}", id);
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
+
+    /**
+     * 編輯員工信息
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @Operation(summary = "編輯員工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("編輯員工信息，參數: {}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 }

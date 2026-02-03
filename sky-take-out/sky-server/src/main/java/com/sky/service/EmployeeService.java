@@ -26,4 +26,24 @@ public interface EmployeeService {
      * @return
      */
     PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 啟用或禁用員工帳號
+     * @param status
+     * @param id
+     */
+    void startOrStop(Integer status, Long id);
+
+    /**
+     * 根據 ID 查詢員工信息
+     * @param id
+     * @return
+     */
+    Employee getById(Long id);
+
+    /**
+     * 編輯員工信息
+     * @param employeeDTO
+     */
+    void update(EmployeeDTO employeeDTO);
 }

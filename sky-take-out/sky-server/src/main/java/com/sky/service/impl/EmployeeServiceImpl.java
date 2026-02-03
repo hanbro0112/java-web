@@ -33,36 +33,38 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 員工登錄
+     *
      * @param employeeLoginDTO
      * @return
      */
     public Employee login(EmployeeLoginDTO employeeLoginDTO) {
-       String username = employeeLoginDTO.getUsername();
-       String password = employeeLoginDTO.getPassword();
+        String username = employeeLoginDTO.getUsername();
+        String password = employeeLoginDTO.getPassword();
 
-       Employee employee = employeeMapper.getByUsername(username);
+        Employee employee = employeeMapper.getByUsername(username);
 
-       if (employee == null) {
-           // 帳號不存在
-           throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
-       }
+        if (employee == null) {
+            // 帳號不存在
+            throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
+        }
 
-       password = DigestUtils.md5DigestAsHex(password.getBytes());
-       if (!password.equals(employee.getPassword())) {
-           // 密碼錯誤
-           throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
-       }
+        password = DigestUtils.md5DigestAsHex(password.getBytes());
+        if (!password.equals(employee.getPassword())) {
+            // 密碼錯誤
+            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
+        }
 
-       if (employee.getStatus() == StatusConstant.DISABLE) {
-           // 帳號已鎖定
-           throw new AccountLockException(MessageConstant.ACCOUNT_NOT_FOUND);
-       }
+        if (employee.getStatus() == StatusConstant.DISABLE) {
+            // 帳號已鎖定
+            throw new AccountLockException(MessageConstant.ACCOUNT_NOT_FOUND);
+        }
 
-       return employee;
+        return employee;
     }
 
     /**
      * 新增員工
+     *
      * @param employeeDTO
      */
     @Override
@@ -92,9 +94,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 員工分頁查詢
+     *
      * @param employeePageQueryDTO
      * @return
      */
+    @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
 
@@ -103,5 +107,47 @@ public class EmployeeServiceImpl implements EmployeeService {
         Long total = page.getTotal();
         List<Employee> records = page.getResult();
         return new PageResult(total, records);
+    }
+
+    /**
+     * 啟用或禁用員工帳號
+     *
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
+        employeeMapper.update(employee);
+    }
+
+    /**
+     * 根據 ID 查詢員工信息
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee getById(Long id) {
+        Employee employee = employeeMapper.getById(id);
+        employee.setPassword("****");
+        return employee;
+    }
+
+    /**
+     * 編輯員工信息
+     * @param employeeDTO
+     */
+    @Override
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
     }
 }
