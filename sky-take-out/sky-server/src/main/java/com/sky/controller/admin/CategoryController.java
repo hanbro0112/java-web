@@ -13,6 +13,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 分類管理
  */
@@ -87,6 +89,18 @@ public class CategoryController {
     public Result<String> startOrStop(@PathVariable Integer status, Long id) {
         categoryService.startOrStop(status, id);
         return Result.success();
+    }
+
+    /**
+     * 根據類型查詢分類
+     * @param type
+     * @return
+     */
+    @GetMapping("/list")
+    @Operation(summary = "根據類型查詢分類")
+    public Result<List<Category>> list(Integer type) {
+       List<Category> list = categoryService.list(type);
+       return Result.success(list);
     }
 }
 

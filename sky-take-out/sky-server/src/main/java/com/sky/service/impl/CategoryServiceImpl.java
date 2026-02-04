@@ -18,6 +18,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class CategoryServiceImpl implements CategoryService {
@@ -96,5 +98,14 @@ public class CategoryServiceImpl implements CategoryService {
                 .id(id)
                 .build();
         categoryMapper.update(category);
+    }
+
+    /**
+     * 根據類型查詢分類
+     * @param type
+     * @return
+     */
+    public List<Category> list(Integer type) {
+       return categoryMapper.list(type);
     }
 }
