@@ -80,6 +80,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 設置默認密碼
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
+        /** AOP 公共字段填充
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
 
@@ -88,7 +89,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employee.setCreateUser(currentId);
         employee.setUpdateUser(currentId);
-
+        **/
         employeeMapper.insert(employee);
     }
 
@@ -145,9 +146,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
-
+        /** AOP 公共字段填充
         employee.setUpdateTime(LocalDateTime.now());
         employee.setUpdateUser(BaseContext.getCurrentId());
+        **/
         employeeMapper.update(employee);
     }
 }
