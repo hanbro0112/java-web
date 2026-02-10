@@ -64,6 +64,10 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         log.info("設置靜態資源映射...");
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        log.info("設置文件上傳路徑...");
+        registry.addResourceHandler("/upload/**")
+                .addResourceLocations("file:./sky-take-out/upload/");
     }
 
     /**
