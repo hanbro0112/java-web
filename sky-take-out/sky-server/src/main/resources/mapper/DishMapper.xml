@@ -29,4 +29,55 @@
         </where>
         order by d.create_time desc
     </select>
+
+    <!-- 根據ID查詢菜品 -->
+    <select id="getById" resultType="com.sky.entity.Dish">
+        select * from dish where id = #{id}
+    </select>
+
+    <!-- 刪除菜品 -->
+    <delete id="deleteById">
+        delete from dish where id = #{id}
+    </delete>
+
+    <!-- 更新菜品 -->
+    <update id="update">
+        update dish
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根據分類id查詢菜品 -->
+    <select id="list" resultType="com.sky.entity.Dish">
+        select * from dish
+        <where>
+            <if test="name!=null">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <!-- 根據套餐ID查詢菜品 -->
+    <select id="getBySetmealId" resultType="com.sky.entity.Dish">
+        select d.*
+        from dish d
+        left join setmeal_dish sd on d.id = sd.dish_id
+        where sd.setmeal_id = #{id}
+    </select>
 </mapper>

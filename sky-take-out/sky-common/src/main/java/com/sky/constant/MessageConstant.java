@@ -11,4 +11,8 @@ public class MessageConstant {
     public static final String CATEGORY_BE_RELATED_BY_DISH = "該分類關聯了菜品，無法刪除";
 
     public static final String UPLOAD_FAILED = "文件上傳失敗";
+
+    public static final String DISH_ON_SALE = "菜品正在售賣中，無法刪除";
+    public static final String DISH_BE_RELATED_BY_SETMEAL = "該菜品關聯了套餐，無法刪除";
+
 }
