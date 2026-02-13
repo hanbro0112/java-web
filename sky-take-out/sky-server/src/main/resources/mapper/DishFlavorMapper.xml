@@ -9,4 +9,14 @@
             (#{item.dishId}, #{item.name}, #{item.value})
         </foreach>
     </insert>
+
+    <!-- 刪除菜品口味 -->
+    <delete id="deleteByDishId">
+        delete from dish_flavor where dish_id = #{dishId}
+    </delete>
+
+    <!-- 根據菜品id查詢口味 -->
+    <select id="getByDishId" resultType="com.sky.entity.DishFlavor">
+        select * from dish_flavor where dish_id = #{dishId}
+    </select>
 </mapper>

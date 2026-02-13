@@ -43,7 +43,7 @@ public class DishController {
 
     @DeleteMapping
     @Operation(summary = "批量刪除菜品")
-    public Result delete(@RequestBody List<Long> ids) {
+    public Result delete(@RequestParam List<Long> ids) {
         log.info("批量刪除菜品: {}", ids);
         dishService.deleteBatch(ids);
 
